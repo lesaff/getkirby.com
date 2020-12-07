@@ -40,18 +40,18 @@ return [
     'kirbytags:after' => function(string $text = null, array $data = []) {
 
         // $text = preg_replace_callback('!<code>(.*)</code>!siU', function($match) {
-        //     return formatDatatype($match[1]);
+        //     return formatType($match[1]);
         // }, $text);
 
         // Now handled by the Maki plugin.
         // $text = preg_replace_callback('!`([a-z_]+)`!iU', function($match) {
-        //     return formatDatatype($match[1]);
+        //     return formatType($match[1]);
         // }, $text);
 
         return $text;
     },
     'kirbytags:after' => function(string $text = null, array $data = []) {
-        
+
         // SINCE
         return preg_replace_callback('!<since v="([0-9.]+)">(.*)</since>!siU', function($match) use ($data) {
             // Prepare comparison to current version
@@ -70,7 +70,7 @@ return [
                 $block .= ' current';
             }
 
-            $block .= '">Since <code>' . version($match[1], '%s') . '</code></span>';
+            $block .= '">Since <code>' . version($match[1]) . '</code></span>';
             $block .= $this->kirbytext($match[2], $data);
             $block .= '</div>';
 
